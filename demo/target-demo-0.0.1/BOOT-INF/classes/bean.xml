@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <context:annotation-config/>
+    <!--<context:component-scan base-package="com.example.demo"/>-->
+
+    <bean id = "singletonDIServiceB_1" class="com.example.demo.service.impl.SingletonDIServiceBImpl"/>
+    <bean id = "singletonDIServiceB_2" class="com.example.demo.service.impl.SingletonDIServiceBImpl"/>
+    <bean id = "prototypeDIServiceD_1" class="com.example.demo.service.impl.PrototypeDIServiceDImpl" scope="prototype"/>
+    <bean id = "prototypeDIServiceD_2" class="com.example.demo.service.impl.PrototypeDIServiceDImpl" scope="prototype"/>
+
+    <bean id="beforeLog" class="com.example.demo.aop.BeforeLog"/>
+    <bean id="afterLog" class="com.example.demo.aop.AfterLog"/>
+    <!--使用Spring API接口-->
+    <!--配置AOP，需要导入AOP的约束-->
+    <aop:config>
+        <!--配置切入点-->
+        <aop:pointcut id="pointcut" expression="execution(public * com.example.demo.service.AOPService.testAOPAPI3(..))"/>
+        <!--选取相应的前后置方法-->
+        <aop:advisor advice-ref="beforeLog" pointcut-ref="pointcut"/>
+        <aop:advisor advice-ref="afterLog" pointcut-ref="pointcut"/>
+    </aop:config>
+<!--    <aop:aspectj-autoproxy proxy-target-class="true" expose-proxy="true"/>-->
+    <context:property-placeholder location="classpath:application.properties"/>
+
+    <!--   AopXmlTestBean类的bean配置 -->
+    <bean id="aopxmltestbean" class="com.example.demo.model.AopXmlTestBean">
+        <constructor-arg name="id">
+            <value >1</value>
+        </constructor-arg>
+        <constructor-arg name="name">
+            <value>aopxmltestName</value>
+        </constructor-arg>
+    </bean>
+
+    <!--XmlDIServiceImpl 实现类的bean配置    -->
+    <bean id="xmlDIServiceImpl" class="com.example.demo.service.impl.XmlDIServiceImpl"></bean>
+    <!-- XmlDIServiceProvider 类的配置 ，并将提供的XmlDIService注入   -->
+    <bean id="xmlDIServiceProvider" class="com.example.demo.model.XmlDIServiceProvider" >
+        <property name="xmlDIService" ref="xmlDIServiceImpl"></property>
+    </bean>
+
+    <!--AopXmlAspect 类的bean配置-->
+    <bean id="aopxmltestfatherbean" class="com.example.demo.aspect.AopXmlAspect"></bean>
+    <bean id="xmlBaseBean" class="com.example.demo.model.XmlBaseBean"></bean>
+
+    <aop:config>
+        <!--定义切面-->
+        <aop:pointcut id="ac1" expression="execution(public * com.example.demo.model.AopXmlTestBean.doSomething(..))" />
+        <aop:aspect ref="aopxmltestfatherbean">
+            <aop:pointcut id="action1" expression="execution(public * com.example.demo.model.AopXmlTestBean.doSomething(..))" />
+            <aop:before method="doBefore" pointcut-ref="action1"/>
+            <aop:after method="doAfter" pointcut-ref="ac1"/>
+        </aop:aspect>
+    </aop:config>
+</beans>
