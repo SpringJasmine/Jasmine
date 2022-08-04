@@ -285,7 +285,13 @@ public class CreateEdge {
         }
         JimpleBody jimpleBody = jimpleUtils.createJimpleBody(createMethod, signatures, sootClass.getName());
         createMethod.setActiveBody(jimpleBody);
-        processMain(psm, sootClass.getShortName(), sootClass.getName(), sootClass.getMethodByName("<init>").toString(), createMethod.toString());
+        String methodName;
+        try {
+            methodName = sootClass.getMethodByName("<init>").toString();
+        } catch (AmbiguousMethodException ame) {
+            methodName = sootClass.getMethod("void <init>()").toString();
+        }
+        processMain(psm, sootClass.getShortName(), sootClass.getName(), methodName, createMethod.toString());
     }
 
     /**

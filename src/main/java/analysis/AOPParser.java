@@ -513,15 +513,17 @@ public class AOPParser {
         JimpleBody aspectBody = (JimpleBody) aspectModel.getSootMethod().retrieveActiveBody().clone();
         PatchingChain<Unit> aspectUnits = aspectBody.getUnits();
         Unit paramInsertPoint = null;
+        int paramCount = 0;
         for (Unit unit : aspectUnits) {
             if (unit.toString().contains("@parameter")) {
                 paramInsertPoint = unit;
-            } else if (paramInsertPoint != null) {
+                paramCount++;
+            } else if (paramCount!=0) {
                 break;
             }
         }
 
-        for (int i = parameterTypes.size() - 1; i > 0; i--) {
+        for (int i = parameterTypes.size() - 1; i > paramCount - 1; i--) {
             Local param = jimpleUtils.addLocalVar("param" + i, parameterTypes.get(i), aspectBody);
             if (paramInsertPoint != null) {
                 aspectUnits.insertAfter(jimpleUtils.createIdentityStmt(param,
