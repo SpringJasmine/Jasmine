@@ -6,6 +6,5 @@ gradle.properties
 settings.gradle
 gradlew.bat
 gradlew
-demo
 sootOutput
 .DS_Store

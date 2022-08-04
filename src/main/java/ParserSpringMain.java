@@ -71,7 +71,7 @@ public class ParserSpringMain {
 
         System.out.println(dir);
         Options.v().set_process_dir(dir);
-        // turn on spack
+        // turn on SPARK and Jasmine
         Options.v().setPhaseOption("cg.spark", "on");
         Options.v().setPhaseOption("cg.spark", "verbose:true");
         Options.v().setPhaseOption("cg.spark", "enabled:true");
@@ -91,6 +91,7 @@ public class ParserSpringMain {
         // Options.v().setPhaseOption("cg.cha", "enabled:true");
         // Options.v().setPhaseOption("cg.cha", "verbose:true");
         // Options.v().setPhaseOption("cg.cha", "apponly:true");
+        // Options.v().set_verbose(true);
 
         Options.v().set_whole_program(true);
 
