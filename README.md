@@ -216,12 +216,16 @@ public class BenchmarksConfig {
     ...
 ```
 
+<img src="https://github.com/SpringJasmine/IMAGE/blob/main/image-20220830194211420.png" alt="image-20220830190756735" style="zoom:33%;" />
+
 ```java
 // com.taint.analysis.Main
 // Modify the field of benchmark to project name and the field of analysisalgorithm to the detection algorithm (cha, spark, Jasmine)
 13:    public static String benchmark = "mall-admin";
 14:    public static String analysisAlgorithm = "cha";
 ```
+
+<img src="https://github.com/SpringJasmine/IMAGE/blob/main/image-20220830194431055.png" alt="image-20220830190756735" style="zoom:33%;" />
 
 * The fourth step is to add PointerAnalysis-1.0-SNAPSHOT.jar in the dist directory as a project dependency
 
@@ -235,6 +239,8 @@ public class BenchmarksConfig {
   "edge_config": "/Users/FlowDroidPlus/dataleak/src/main/resources/config.properties"
 }
 ```
+
+<img src="https://github.com/SpringJasmine/IMAGE/blob/main/image-20220830194748092.png" alt="image-20220830190756735" style="zoom:33%;" />
 
 ### 4.2 run FlowDroid
 
@@ -252,3 +258,5 @@ public class BenchmarksConfig {
 ```
 
 * Execute the main method in ```com.taint.analysis.Main``` under the **dataleak** Module
+
+<img src="https://github.com/SpringJasmine/IMAGE/blob/main/image-20220830195001032.png" alt="image-20220830190756735" style="zoom:33%;" />
