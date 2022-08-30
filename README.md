@@ -82,7 +82,8 @@ $ bash /root/JasmineforInfoSpringDemo.bash
 # Modify bean_xml_paths to the absolute path where the corresponding file
 bean_xml_paths = /User/Jasmine/demo/target-demo-0.0.1/BOOT-INF/classes/bean.xml
 ```
-
+<img src="https://github.com/SpringJasmine/IMAGE/blob/main/image-20220830192659193.png" alt="image-20220830190525954" style="zoom:33%;" />
+<img src="https://github.com/SpringJasmine/IMAGE/blob/main/image-20220830185918067.png" alt="image-20220830190525954" style="zoom:33%;" />
 * Modify```ParserSpringMain```
 
 ```java
@@ -115,6 +116,7 @@ bean_xml_paths = /User/Jasmine/demo/target-demo-0.0.1/BOOT-INF/classes/bean.xml
 ```
 
 * Execute the main method in ```ParserSpringMain```
+<img src="https://github.com/SpringJasmine/IMAGE/blob/main/image-20220830190756735.png" alt="image-20220830190756735" style="zoom:33%;" />
 
 #### 2.2.2 SPARK, Jasmine context-sensitive（corresponding to ID-2-DI(Singleton), ID-3-DI(Prototype)）
 
